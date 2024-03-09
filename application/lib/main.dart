@@ -1,4 +1,5 @@
 import 'package:application/homepage.dart';
+import 'package:application/splashscreen.dart';
 import 'package:application/startpage.dart';
 import 'package:flutter/material.dart';
 
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Homepage(),
+      home: SplashScreen(),
     );
   }
 }

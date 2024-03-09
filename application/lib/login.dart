@@ -12,29 +12,32 @@ class Loginpage extends StatefulWidget {
 TextEditingController emailController = TextEditingController();
 TextEditingController passwordController = TextEditingController();
 
+
 class _LoginpageState extends State<Loginpage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor:Color.fromARGB(255, 91, 163, 204),
       body: ListView(
         children: [
           const SizedBox(
-            height: 130,
+            height: 250,
             child: Center(
                 child: Text('Super Mart',
                     style:
-                        TextStyle(fontWeight: FontWeight.bold, fontSize: 30))),
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 40,color:  Color.fromARGB(255, 4, 54, 105)))),
           ),
           const ListTile(
             title:
-                Text('welcome', style: TextStyle(fontWeight: FontWeight.bold)),
-            subtitle: Text('Please login or sign up to continue our app'),
+                Text('welcome', style: TextStyle(fontWeight: FontWeight.bold,fontSize: 22,color: Color.fromARGB(255, 4, 54, 105))),
+            subtitle: Text('Please login or sign up to continue our app',style: TextStyle(fontSize: 15,color:  Color.fromARGB(255, 4, 54, 105)),),
           ),
           const SizedBox(
-            height: 10,
+            height: 30,
           ),
           listTileLoginAndSignup('Email', emailController, false),
           listTileLoginAndSignup('Password', passwordController, true),
+          SizedBox(height: 15,),
           Center(
             child: SizedBox(
                 height: 30,
@@ -54,7 +57,7 @@ class _LoginpageState extends State<Loginpage> {
                     setState(() {});
                   },
                   style:
-                      ElevatedButton.styleFrom(backgroundColor: Colors.black),
+                      ElevatedButton.styleFrom(backgroundColor: Color.fromARGB(255, 37, 36, 36)),
                   child: const Text('login',
                       style: TextStyle(
                           fontWeight: FontWeight.bold, color: Colors.white)),
@@ -74,7 +77,7 @@ listTileLoginAndSignup(
   return ListTile(
     title: Text(
       (title),
-      style: TextStyle(fontWeight: FontWeight.bold),
+      style: TextStyle(fontWeight: FontWeight.bold,color:  Color.fromARGB(255, 4, 54, 105),fontSize: 18),
     ),
     subtitle: SizedBox(height: 30, child: textfeild(contorller, falseortrue)),
   );
@@ -85,7 +88,7 @@ textfeild(controller, open) {
     obscureText: open,
     controller: controller,
     decoration: const InputDecoration(
-        contentPadding: EdgeInsets.only(bottom: 25),
+        contentPadding: EdgeInsets.only(bottom: 20),
         enabledBorder: UnderlineInputBorder(
             borderSide: BorderSide(color: Colors.grey, width: 0))),
     cursorHeight: 20,

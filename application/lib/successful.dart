@@ -7,14 +7,15 @@ class Successfull extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromARGB(255, 91, 163, 204),
       body: Center(
         child: Column(
           children: [
             const SizedBox(
-              height: 200,
+              height: 250,
               child: Icon(
                 Icons.check_circle_outline,
-                color: Colors.teal,
+                color: Color.fromARGB(255, 62, 138, 65),
                 size: 100,
               ),
             ),

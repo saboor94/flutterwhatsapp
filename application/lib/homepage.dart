@@ -1,3 +1,8 @@
+import 'package:application/bottomna.dart';
+import 'package:application/discount.dart';
+import 'package:application/login.dart';
+import 'package:application/prodcut.dart';
+import 'package:application/signup.dart';
 import 'package:flutter/material.dart';
 
 class Homepage extends StatefulWidget {
@@ -11,24 +16,7 @@ class _HomepageState extends State<Homepage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
-        bottomNavigationBar: BottomNavigationBar(
-          showSelectedLabels:false,
-          showUnselectedLabels:false,
-          
-          backgroundColor: Colors.blue,
-          selectedLabelStyle: TextStyle(fontSize: 0),
-          unselectedLabelStyle: TextStyle(fontSize: 0),
-          items: [
-            BottomNavigationBarItem(
-                icon:  Icon(Icons.home,color:Colors.black,),label: ''),
-            BottomNavigationBarItem(icon: Icon(Icons.person,color:Colors.black,),label: ''),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.shopping_cart,color:Colors.black),label: ''),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.notifications,color:Colors.black),label: '')
-          ],
-        ),
+        bottomNavigationBar: bottom(context),
         appBar: AppBar(
           actions: [
             IconButton(
@@ -44,61 +32,78 @@ class _HomepageState extends State<Homepage> {
             child: Column(
           children: [
             Container(
-              margin: EdgeInsets.only(left: 10),
+              margin: const EdgeInsets.only(left: 10),
               height: 200,
               child: GridView.builder(
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 1,
                     crossAxisSpacing: 8.0,
                     mainAxisSpacing: 8.0,
                   ),
-                  itemCount: 16,
+                  itemCount: dicount.length,
                   itemBuilder: (context, index) {
                     return Card(
                         child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(6),
-                          image: DecorationImage(
-                              image: NetworkImage(
-                                  'https://t4.ftcdn.net/jpg/04/61/47/03/360_F_461470323_6TMQSkCCs9XQoTtyer8VCsFypxwRiDGU.jpg'),
-                              fit: BoxFit.cover)),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'hello',
-                          ),
-                          Text('how r u')
-                        ],
-                      ),
-                    ));
+                            decoration: boxdecorationfun(),
+                            child: discountColumn(index)));
                   }),
             ),
             ListTile(
-              title: Text('New Arrivals'),
-              trailing: Text('View All'),
+              title: Text(
+                'Products',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              trailing: Text(
+                'View All',
+                style: TextStyle(fontSize: 15),
+              ),
             ),
-            Container(
-              margin: EdgeInsets.only(left: 10),
-              height: 300,
-              child: GridView.builder(
-                  shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 1,
-                    crossAxisSpacing: 8.0,
-                    mainAxisSpacing: 8.0,
-                  ),
-                  itemCount: 16,
-                  itemBuilder: (context, index) {
-                    return Card(
-                      color: Colors.grey,
-                    );
-                  }),
-            ),
+            GridView.builder(
+                shrinkWrap: true,
+                // scrollDirection: Axis.vertical,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 8.0,
+                  mainAxisSpacing: 8.0,
+                ),
+                itemCount: products.length,
+                itemBuilder: (context, index) {
+                  return Card(
+                    color: Colors.white,
+                    child: Container(
+                      child: Column(
+                        children: [
+                          Container(
+                            decoration: boxdec(products[index].productimage),
+                            height: 120,width: 300,
+                            child:IconButton(icon:Icon(Icons.shopping_cart) ,onPressed: (){},alignment: Alignment.topRight,)
+                          ),
+                          SizedBox(height: 5,),
+                          Center(child: Text('The ${products[index].productname}',style: TextStyle(fontWeight: FontWeight.bold),)),
+                          Center(child: Text('Price:${products[index].productprice}'),),
+                          
+                          
+                        ],
+                      ),
+                    ),
+                  );
+                }),
           ],
         )));
   }
+}
+
+iconbutton(icon, context, Screen) {
+  return IconButton(
+    //alignment: Alignment.bottomRight,
+      onPressed: () {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => Screen));
+      },
+      icon: Icon(
+        icon,
+        color: Colors.black,
+      ));
 }
